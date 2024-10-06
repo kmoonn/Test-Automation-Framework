@@ -4,13 +4,18 @@ from conf.setting import FILE_PATH
 
 
 def get_testcase_yaml(file):
+    """
+    读取 YAML 文件并返回数据
+    :param file: YAML 文件路径
+    :return 文件内容
+    """
     try:
         with open(file, 'r', encoding='utf-8') as f:
             data = yaml.safe_load(f)  # 使用 safe_load 读取数据
             return data  # 返回读取的数据
     except Exception as e:
         print(f"Error reading YAML file: {e}")
-        return
+        return None
 
 
 class ReadYamlData:
@@ -22,7 +27,7 @@ class ReadYamlData:
 
     def _write_yaml(self, file_path, data, mode):
         with open(file_path, mode, encoding='utf-8') as f:
-            yaml.dump(data, f, allow_unicode=True)
+            yaml.dump(data, f, allow_unicode=True) # 设置allow_unicode = False，为正确显示中文
 
     def write_yaml_data(self, data):
         file_path = FILE_PATH['extract']
